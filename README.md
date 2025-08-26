@@ -1,2 +1,83 @@
-# bert-sentiment-analysis
-A minimal and efficient implementation for fine-tuning BERT models on sentiment analysis tasks. This project provides a clean pipeline for training, evaluating, and deploying sentiment classification models using Hugging Face's Transformers library. Perfect for binary or multi-class sentiment classification with custom datasets.
+# Проект: Анализ тональности текста с помощью BERT
+
+Этот репозиторий содержит код для обучения и развертывания модели BERT для задачи анализа тональности текста (sentiment analysis). Проект имеет модульную структуру, что делает его удобным для использования и расширения.
+
+-----
+
+## Структура проекта
+
+```
+bert-sentiment-analysis/
+│
+├── config.yaml               # Все настройки: модель, данные, гиперпараметры
+│
+├── data/
+│   ├── train.csv             # Обучающая выборка
+│   ├── test.csv              # Тестовая выборка
+│   └── val.csv               # Валидационная выборка
+│
+├── src/
+│   ├── data_loader.py        # Загрузка и подготовка данных
+│   ├── model.py              # Инициализация модели BERT
+│   ├── train.py              # Скрипт для обучения модели
+│   ├── predict.py            # Скрипт для инференса
+│   └── utils.py              # Вспомогательные функции
+│
+├── models/
+│   └── best_model/           # Директория для сохранения лучших моделей
+│
+├── requirements.txt          # Список зависимостей
+└── README.md                 # Этот файл с инструкциями
+```
+
+\<br\>
+
+-----
+
+## Установка
+
+1.  Клонируйте репозиторий:
+    ```bash
+    git clone https://github.com/LevOssadtchi-NLP/bert-sentiment-analysis.git
+    cd bert-sentiment-analysis
+    ```
+2.  Установите все необходимые зависимости из файла `requirements.txt`:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+-----
+
+## Использование
+
+### 1\. Подготовка данных
+
+Поместите ваши датасеты (`train.csv`, `val.csv`, `test.csv`) в директорию `data/`. Убедитесь, что каждый файл содержит колонки `text` (для текста) и `label` (для метки класса).
+
+### 2\. Конфигурация обучения
+
+Откройте файл `config.yaml` для настройки обучения. Вы можете изменить такие параметры, как:
+
+  * **`model.name`**: Имя модели из репозитория Hugging Face (например, `google-bert/bert-base-uncased`).
+  * **`training.epochs`**: Количество эпох обучения.
+  * **`training.learning_rate`**: Скорость обучения.
+
+### 3\. Обучение модели
+
+Запустите скрипт обучения из директории `src/`:
+
+```bash
+python train.py
+```
+
+Обученная модель будет автоматически сохранена в директорию `models/best_model`.
+
+### 4\. Предсказание
+
+Для использования обученной модели для предсказаний на новых данных, запустите:
+
+```bash
+python predict.py
+```
+
+Этот скрипт загрузит сохраненную модель, выполнит инференс на тестовой выборке и выведет пример предсказания для одного предложения.
