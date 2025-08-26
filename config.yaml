@@ -1,0 +1,21 @@
+# Data paths
+data:
+  train_path: "../data/train_df.csv"
+  test_path: "../data/test_df.csv"
+  val_path: "../data/val_df.csv"
+  
+# Model parameters
+model:
+  name: "google-bert/bert-base-uncased"
+  num_labels: 3 # For binary sentiment analysis (positive/negative)
+
+# Training parameters
+training:
+  learning_rate: 1.2e-5
+  epochs: 5
+  batch_size: 64
+  max_len: 128
+
+# Directories for saving models and logs
+paths:
+  output_dir: "../models/best_model"
